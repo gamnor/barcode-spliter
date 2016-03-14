@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.citibank.com.br/*"],
-      "js": ["barCode.js"]
+      "js": ["barcode.js"]
     }
   ],
   "browser_action": {

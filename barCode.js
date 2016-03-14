@@ -1,3 +1,7 @@
+/*
+* Created by Victor Magno on 03.14.2016 
+*/
+
 var blocksAmountInFichaComp = 8,
     blocksAmountInConcess = 4;
 
