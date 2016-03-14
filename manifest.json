@@ -1,0 +1,24 @@
+{
+  "name": "Barcode Typing Saviour",
+  "description": "Split a barcode into blocks",
+  "version": "1.0",
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.citibank.com.br/*"],
+      "js": ["barCode.js"]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Paste the barcode into a block."
+  },
+  "manifest_version": 2
+}
+
+
