@@ -16,7 +16,6 @@ function setEventListener(){
       blocks[i].addEventListener("paste", function(event){
 
         splitBarcode(event.clipboardData.getData('text/plain'), blocks);
-
     });
   }
 }
@@ -46,7 +45,10 @@ function splitBarcode(barCode, blocks){
 
 function splitConcessionariaBarcode(barCode){
 
-  var barcodeInBlocks = removeNonNumeric(barCode).match(/\d{12}/g);
+  var barcodeInBlocks,
+      patternConcessionaria = /\d{12}/g;
+  
+  barcodeInBlocks = removeNonNumeric(barCode).match(patternConcessionaria);
 
   if(barcodeInBlocks.length == blocksAmountInConcess){
     return barcodeInBlocks;
@@ -56,23 +58,26 @@ function splitConcessionariaBarcode(barCode){
 
 function splitFichaCompensacaoBarcode(barCode){
 
-  var lastBlockSize = 15;
-  var barCodeInBlocks = removeNonNumeric(barCode).match(/(\d{5})(\d{5})(\d{5})(\d{6})(\d{5})(\d{6})(\d)(\d*)/);
-
+  var barCodeInBlocks,
+      lastBlockSize = 15;
+      lastIndex = blocksAmountInFichaComp - 1,
+      patternFichaCompensacao = /(\d{5})(\d{5})(\d{5})(\d{6})(\d{5})(\d{6})(\d)(\d*)/;
+      
+  barCodeInBlocks = removeNonNumeric(barCode).match(patternFichaCompensacao);
+      
   if(barCodeInBlocks){
-
+        
+      //Getting only the groups
       barCodeInBlocks = barCodeInBlocks.slice(1);
 
       if(barCodeInBlocks.length == blocksAmountInFichaComp &&
-         barCodeInBlocks[blocksAmountInFichaComp - 1].length <= lastBlockSize) {
+         barCodeInBlocks[lastIndex].length <= lastBlockSize) {
 
-          if (barCodeInBlocks[blocksAmountInFichaComp - 1].length < lastBlockSize) {
-              barCodeInBlocks[blocksAmountInFichaComp - 1] =
-                  barCodeInBlocks[blocksAmountInFichaComp - 1] + Array(lastBlockSize - barCodeInBlocks[blocksAmountInFichaComp - 1].length).join("0");
+          if (barCodeInBlocks[lastIndex].length < lastBlockSize) {
+              barCodeInBlocks[lastIndex] += Array(lastBlockSize - barCodeInBlocks[lastIndex].length).join("0");
           }
           return barCodeInBlocks;
       }
-
   }
   return [];
 }
@@ -86,6 +91,3 @@ function removeNonNumeric(barCode){
 
   return "";
 }
-
-
-
