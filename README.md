@@ -1,6 +1,6 @@
 # Barcode Spliter
-Simple Chrome Extension that splits barcodes into barcode blocks in online banks. 
+Simple Chrome Extension that splits barcodes into barcode blocks in Citibank's online bank. 
 
-It really saves my time, since my online bank does not have this feature.  
+It really saves my time, since they do not have a feature like that.  
 
 
