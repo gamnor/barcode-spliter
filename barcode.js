@@ -1,5 +1,5 @@
 /*
-* Created by Victor Magno on 03.14.2016 
+* Created by Victor Magno on 03.14.2016
 */
 
 var blocksAmountInFichaComp = 8,
@@ -14,7 +14,6 @@ function setEventListener(){
   for(var i=0; i < blocks.length; i++){
 
       blocks[i].addEventListener("paste", function(event){
-
         splitBarcode(event.clipboardData.getData('text/plain'), blocks);
     });
   }
@@ -40,6 +39,8 @@ function splitBarcode(barCode, blocks){
       for (var i = 0; i < blocks.length; i++) {
         blocks[i].value = barcodeInBlocks[i];
       }
+
+      document.getElementsByClassName("btn_center")[0].focus();
     }
 }
 
@@ -47,7 +48,7 @@ function splitConcessionariaBarcode(barCode){
 
   var barcodeInBlocks,
       patternConcessionaria = /\d{12}/g;
-  
+
   barcodeInBlocks = removeNonNumeric(barCode).match(patternConcessionaria);
 
   if(barcodeInBlocks.length == blocksAmountInConcess){
@@ -62,11 +63,11 @@ function splitFichaCompensacaoBarcode(barCode){
       lastBlockSize = 15;
       lastIndex = blocksAmountInFichaComp - 1,
       patternFichaCompensacao = /(\d{5})(\d{5})(\d{5})(\d{6})(\d{5})(\d{6})(\d)(\d*)/;
-      
+
   barCodeInBlocks = removeNonNumeric(barCode).match(patternFichaCompensacao);
-      
+
   if(barCodeInBlocks){
-        
+
       //Getting only the groups
       barCodeInBlocks = barCodeInBlocks.slice(1);
 
